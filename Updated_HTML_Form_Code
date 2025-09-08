@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html> 
+<html lang ="en"> 
 <head> 
      <title> HTML Form Document</title> 
 </head> 
@@ -12,7 +12,7 @@
      <label for="EmailAddress">EmailAddress:</label>
      <input type="email" id="EmailAddress" name="EmailAddress" required>
      <label for="PhoneNumber">PhoneNumber:</label> 
-     <input type="cellphone" id="PhoneNumber" name="PhoneNumber" required> 
+     <input type="tel" id="PhoneNumber" name="PhoneNumber" required> 
     <br><br> 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
@@ -32,16 +32,16 @@
      <input type="checkbox" id="TheBible" name="TheBible" value="book">
      <label for="TheBible">The Bible</label><br>
      <input type="checkbox" id="ThePolishedHoe" name="ThePolishedHoe" value="book">
-     <label for="ThePolishedHoe">The Polished Hoe</abel><br>
+     <label for="ThePolishedHoe">The Polished Hoe</label><br>
      <input type="checkbox" id="GreatExpectations" name="GreatExpectations" value="book">
      <label for="GreatExpectations">Great Expectations</label><br>
      <input type="checkbox" id="MobyDick" name="MobyDick" value="book">
-     <label for="Moby Dick">The Great Whale</label><br>
+     <label for="MobyDick">The Great Whale</label><br>
      <input type="checkbox" id="TheGreatGatsby" name="TheGreatGatsby" value="book">
      <label for="TheGreatGatsby">The Great Gatsby</label><br>
      <input type="checkbox" id="DeathofaSalesman" name="DeathofaSalesman" value="book">
      <label for="DeathofaSalesman">Death of a Salesman</label><br>
-     <input type="checkbox" id="AventuresofHuckleberryFin" name="AdventuresofHuckleberryFinn" value="book">
+     <input type="checkbox" id="AdventuresofHuckleberryFinn" name="AdventuresofHuckleberryFinn" value="book">
      <label for="AdventuresofHuckleberryFinn">Adventures of Huckleberry Finn</label><br>
     </fieldset> 
     <br> 
