@@ -10,69 +10,70 @@
      <label for="LastName">LastName:</label> 
      <input type="text" id="LastName" name="LastName" required>
      <label for="EmailAddress">EmailAddress:</label>
-     <input type="text" id="EmailAddress" name="EmailAddress" required>
+     <input type="email" id="EmailAddress" name="EmailAddress" required>
      <label for="PhoneNumber">PhoneNumber:</label> 
-     <input type="text" id="PhoneNumber" name="PhoneNumber" required> 
+     <input type="cellphone" id="PhoneNumber" name="PhoneNumber" required> 
     <br><br> 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
     <br><br> 
     <fieldset> 
      <legend>Which five books do you like the most?</legend>
-     <input type="checkbox" id="book" name="TheHobbit" value="book">
+     <input type="checkbox" id="TheHobbit" name="TheHobbit" value="book">
      <label for="TheHobbit">The Hobbit</label><br>
-     <input type="checkbox" id="book" name="TheSevenKingdoms" value="book">
+     <input type="checkbox" id="TheSevenKingdoms" name="TheSevenKingdoms" value="book">
      <label for="TheSevenKingdoms">The Seven Kingdoms</label><br>
-     <input type="checkbox" id="book" name="OfMiceandMen" value="book">
+     <input type="checkbox" id="OfMiceandMen" name="OfMiceandMen" value="book">
      <label for="OfMiceandMen">Of Mice and Men</label><br>
-     <input type="checkbox" id="book" name="WhoMovedMyCheese?" value="book">
+     <input type="checkbox" id="WhoMovedMyCheese" name="WhoMovedMyCheese?" value="book">
      <label for="WhoMovedMyCheese">Who Moved My Cheese</label><br>
-     <input type="checkbox" id="book" name="TobePopularorSmart?" value="book">
+     <input type="checkbox" id="TobePopularorSmart" name="TobePopularorSmart?" value="book">
      <label for="TobePopularorSmart">To be Popular or Smart</label><br>
-     <input type="checkbox" id="book" name="TheBible" value="book">
+     <input type="checkbox" id="TheBible" name="TheBible" value="book">
      <label for="TheBible">The Bible</label><br>
-     <input type="checkbox" id="book" name="ThePolishedHoe" value="book">
-     <label for="ThePolishedHoe">The Polished Hoe</label><br>
-     <input type="checkbox" id="book" name="GreatExpectations" value="book">
+     <input type="checkbox" id="ThePolishedHoe" name="ThePolishedHoe" value="book">
+     <label for="ThePolishedHoe">The Polished Hoe</abel><br>
+     <input type="checkbox" id="GreatExpectations" name="GreatExpectations" value="book">
      <label for="GreatExpectations">Great Expectations</label><br>
-     <input type="checkbox" id="book" name="Moby Dick" value="book">
+     <input type="checkbox" id="MobyDick" name="MobyDick" value="book">
      <label for="Moby Dick">The Great Whale</label><br>
-     <input type="checkbox" id="book" name="TheGreatGatsby" value="book">
+     <input type="checkbox" id="TheGreatGatsby" name="TheGreatGatsby" value="book">
      <label for="TheGreatGatsby">The Great Gatsby</label><br>
-     <input type="checkbox" id="book" name="DeathofaSalesman" value="book">
+     <input type="checkbox" id="DeathofaSalesman" name="DeathofaSalesman" value="book">
      <label for="DeathofaSalesman">Death of a Salesman</label><br>
-     <input type="checkbox" id="book" name="AdventuresofHuckleberryFinn" value="book">
+     <input type="checkbox" id="AventuresofHuckleberryFin" name="AdventuresofHuckleberryFinn" value="book">
      <label for="AdventuresofHuckleberryFinn">Adventures of Huckleberry Finn</label><br>
     </fieldset> 
     <br> 
   <fieldset> 
     <legend>Select your preferred musical style:</legend>
-    <input type="radio" id="Music1" name="MusicalGenre" value="R&B"  
+    <input type="radio" id="Music1" name="MusicalGenre" value="R&B">  
     <label for="Music1">R&B</label><br>
-    <input type="radio" id="Music2" name="MusicalGenre" value="Hip-Hop" 
+    <input type="radio" id="Music2" name="MusicalGenre" value="Hip-Hop"> 
     <label for="Music2">Hip-Hop</label><br>
-    <input type="radio" id="Music3" "name"="MusicalGenre" value="Classical"
+    <input type="radio" id="Music3" name="MusicalGenre" value="Classical">
     <label for="Music3">Classical</label><br>
-    <input type="radio" id="Music4" name="MusicalGenre" value="Jazz"
+    <input type="radio" id="Music4" name="MusicalGenre" value="Jazz">
     <label for="Music4">Jazz</label><br>
-    <input type="radio" id="Music5" name="MusicalGenre" value="Reggae" 
+    <input type="radio" id="Music5" name="MusicalGenre" value="Reggae"> 
     <label for="Music5">Reggae</label><br>
-    <input type="radio" id="Music6" name="MusicalGenre" value="Pop" 
+    <input type="radio" id="Music6" name="MusicalGenre" value="Pop">
     <label for="Music6">Pop</label><br>
-    <input type="radio" id="Music7" name="MusicalGenre" value="Techno" 
+    <input type="radio" id="Music7" name="MusicalGenre" value="Techno"> 
     <label for="Music7">Techno</label><br>
-    <input type="radio" id="Music8" name="MusicalGenre" value="Flamenco"  
+    <input type="radio" id="Music8" name="MusicalGenre" value="Flamenco">  
     <label for="Music8">Flamenco</label><br>
    </fieldset>
    <br> 
    <fieldset>
    <label for="BrowserSelection">Which browser did you use for this form?</label>
-   <select name="SelectedBrowswer" id="BrowserSelection">
-   <option value="GoogleChrome">Google Chrome</option>
-   <option value="MicrosoftEdge">Microsoft Edge</option>
-   <option value="MozillaFirefox">Mozilla Firefox</option>
-   <option value="Safari">Safari</option>
-   <option value="Internet Explorer">Internet Explorer</option>
+   <select name="SelectedBrowser" id="BrowserSelection">
+    <option value="GoogleChrome">Google Chrome</option>
+    <option value="MicrosoftEdge">Microsoft Edge</option>
+    <option value="MozillaFirefox">Mozilla Firefox</option>
+    <option value="Safari">Safari</option>
+    <option value="Internet Explorer">Internet Explorer</option>
+   </select>
   </fieldset>
   <input type="submit" value="SubmitResults"> 
   </form>
