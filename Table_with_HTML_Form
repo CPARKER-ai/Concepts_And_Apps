@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<h1>T-Shirt Sells</h1>
+
+<p>This tables shows how many t-shirts were purchased at the FAMU bookstore within the calendar month:</p>
+
+<table>
+  <tr>
+    <th>Month</th>
+    <th>FAMU T-Shirt Sells from Bookstore</th>
+  </tr>
+  <tr>
+    <td>January</td>
+    <td>200</td>
+  </tr>
+  <tr>
+    <td>February</td>
+    <td>450</td>
+  </tr>
+ <tr>
+    <td>March</td>
+    <td>600</td>
+  </tr>
+ <tr>
+    <td>April</td>
+    <td>350</td>
+  </tr>
+  <tr>
+    <td>May</td>
+    <td>800</td>
+  </tr>
+</table>
+
+</body>
+</html>
