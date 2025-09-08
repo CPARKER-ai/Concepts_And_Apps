@@ -4,77 +4,77 @@
      <title> HTML Form Document</title> 
 </head> 
 <body> 
-  <form action="/submit results" method="post"> 
-     <label for="First Name">First Name:</label> 
-     <input type="text" id="First Name" name="First Name" required>
-     <label for="Last Name">Last Name:</label> 
-     <input type="text" id="Last Name" name="Last Name" required>
-     <label for="Email Address">Email Address:</label>
-     <input type="text" id="Email Address" name="Email Address" required>
-     <label for="Phone Number">Phone Number:</label> 
-     <input type="text" id="Phone Number" name="Phone Number" required> 
+  <form action="/submitresults" method="post"> 
+     <label for="FirstName">FirstName:</label> 
+     <input type="text" id="FirstName" name="FirstName" required>
+     <label for="LastName">LastName:</label> 
+     <input type="text" id="LastName" name="LastName" required>
+     <label for="EmailAddress">EmailAddress:</label>
+     <input type="text" id="EmailAddress" name="EmailAddress" required>
+     <label for="PhoneNumber">PhoneNumber:</label> 
+     <input type="text" id="PhoneNumber" name="PhoneNumber" required> 
     <br><br> 
       <label for="password">Password:</label>
-      <input type=password" id=password" name="password" required>
+      <input type="password" id="password" name="password" required>
     <br><br> 
     <fieldset> 
      <legend>Which five books do you like the most?</legend>
-     <input type="checkbox" id="book" name="The Hobbit" value="book">
-     <label for="The Hobbit">The Hobbit</label><br>
-     <input type="checkbox" id="book" name="The Seven Kingdoms" value="book">
-     <label for="The Seven Kingdoms">The Seven Kingdoms</label><br>
-     <input type="checkbox" id="book" name="Of Mice and Men" value="book">
-     <label for="Of Mice and Men">Of Mice and Men</label><br>
-     <input type="checkbox" id="book" name="Who Moved My Cheese?" value="book">
-     <label for="Who Moved My Cheese">Who Moved My Cheese</label><br>
-     <input type="checkbox" id="book" name="To be Popular or Smart?" value="book">
-     <label for="To be Popular or Smart">To be Popular or Smart</label><br>
-     <input type="checkbox" id="book" name="The Bible" value="book">
-     <label for="The Bible">The Bible</label><br>
-     <input type="checkbox" id="book" name="The Polished Hoe" value="book">
-     <label for="The Polished Hoe">The Polished Hoe</label><br>
-     <input type="checkbox" id="book" name="Great Expectations" value="book">
-     <label for="Great Expectations">Great Expectations</label><br>
-     <input type="checkbox" id="book" name="Moby *****" value="book">
-     <label for="Moby *****">The Great Whale</label><br>
-     <input type="checkbox" id="book" name="The Great Gatsby" value="book">
-     <label for="The Great Gatsby">The Great Gatsby</label><br>
-     <input type="checkbox" id="book" name="Death of a Salesman" value="book">
-     <label for="Death of a Salesman">Death of a Salesman</label><br>
-     <input type="checkbox" id="book" name="Adventures of Huckleberry Finn" value="book">
-     <label for="Adventures of Huckleberry Finn">Adventures of Huckleberry Finn</label><br>
+     <input type="checkbox" id="book" name="TheHobbit" value="book">
+     <label for="TheHobbit">The Hobbit</label><br>
+     <input type="checkbox" id="book" name="TheSevenKingdoms" value="book">
+     <label for="TheSevenKingdoms">The Seven Kingdoms</label><br>
+     <input type="checkbox" id="book" name="OfMiceandMen" value="book">
+     <label for="OfMiceandMen">Of Mice and Men</label><br>
+     <input type="checkbox" id="book" name="WhoMovedMyCheese?" value="book">
+     <label for="WhoMovedMyCheese">Who Moved My Cheese</label><br>
+     <input type="checkbox" id="book" name="TobePopularorSmart?" value="book">
+     <label for="TobePopularorSmart">To be Popular or Smart</label><br>
+     <input type="checkbox" id="book" name="TheBible" value="book">
+     <label for="TheBible">The Bible</label><br>
+     <input type="checkbox" id="book" name="ThePolishedHoe" value="book">
+     <label for="ThePolishedHoe">The Polished Hoe</label><br>
+     <input type="checkbox" id="book" name="GreatExpectations" value="book">
+     <label for="GreatExpectations">Great Expectations</label><br>
+     <input type="checkbox" id="book" name="Moby Dick" value="book">
+     <label for="Moby Dick">The Great Whale</label><br>
+     <input type="checkbox" id="book" name="TheGreatGatsby" value="book">
+     <label for="TheGreatGatsby">The Great Gatsby</label><br>
+     <input type="checkbox" id="book" name="DeathofaSalesman" value="book">
+     <label for="DeathofaSalesman">Death of a Salesman</label><br>
+     <input type="checkbox" id="book" name="AdventuresofHuckleberryFinn" value="book">
+     <label for="AdventuresofHuckleberryFinn">Adventures of Huckleberry Finn</label><br>
     </fieldset> 
     <br> 
   <fieldset> 
     <legend>Select your preferred musical style:</legend>
-    <input type="radio" id="Music1" "name"=MusicalGenre" value="R&B"  
+    <input type="radio" id="Music1" name="MusicalGenre" value="R&B"  
     <label for="Music1">R&B</label><br>
-    <input type="radio" id="Music2" "name"=MusicalGenre" value="Hip-Hop" 
+    <input type="radio" id="Music2" name="MusicalGenre" value="Hip-Hop" 
     <label for="Music2">Hip-Hop</label><br>
-    <input type="radio" id="Music3" "name"=MusicalGenre" value="Classical"
+    <input type="radio" id="Music3" "name"="MusicalGenre" value="Classical"
     <label for="Music3">Classical</label><br>
-    <input type="radio" id="Music4" "name"=MusicalGenre" value="Jazz"
+    <input type="radio" id="Music4" name="MusicalGenre" value="Jazz"
     <label for="Music4">Jazz</label><br>
-    <input type="radio" id="Music5" "name"=MusicalGenre" value="Reggae" 
+    <input type="radio" id="Music5" name="MusicalGenre" value="Reggae" 
     <label for="Music5">Reggae</label><br>
-    <input type="radio" id="Music6" "name"=MusicalGenre" value="Pop" 
+    <input type="radio" id="Music6" name="MusicalGenre" value="Pop" 
     <label for="Music6">Pop</label><br>
-    <input type="radio" id="Music7" "name"=MusicalGenre" value="Techno" 
+    <input type="radio" id="Music7" name="MusicalGenre" value="Techno" 
     <label for="Music7">Techno</label><br>
-    <input type="radio" id="Music8" "name"=MusicalGenre" value="Flamenco"  
+    <input type="radio" id="Music8" name="MusicalGenre" value="Flamenco"  
     <label for="Music8">Flamenco</label><br>
    </fieldset>
    <br> 
    <fieldset>
-   <label for="Browser Selection">Which browser did you use for this form?</label>
-   <select name="Selected Browswer" id="Browser Selection">
-   <option value="Google Chrome">Google Chrome</option>
-   <option value="Microsoft Edge">Microsoft Edge</option>
-   <option value="Mozilla Firefox">Mozilla Firefox</option>
+   <label for="BrowserSelection">Which browser did you use for this form?</label>
+   <select name="SelectedBrowswer" id="BrowserSelection">
+   <option value="GoogleChrome">Google Chrome</option>
+   <option value="MicrosoftEdge">Microsoft Edge</option>
+   <option value="MozillaFirefox">Mozilla Firefox</option>
    <option value="Safari">Safari</option>
    <option value="Internet Explorer">Internet Explorer</option>
   </fieldset>
-  <input type="submit" value="Submit Results"> 
+  <input type="submit" value="SubmitResults"> 
   </form>
 </body> 
 </html>
