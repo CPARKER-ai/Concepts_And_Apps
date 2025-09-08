@@ -1,0 +1,81 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+     <title> HTML Form Document</title> 
+</head> 
+<body> 
+  <form action="/submit results" method="post"> 
+     <label for="First Name">First Name:</label> 
+     <input type="text" id="First Name" name="First Name" required>
+     <label for="Last Name">Last Name:</label> 
+     <input type="text" id="Last Name" name="Last Name" required>
+     <label for="Email Address">Email Address:</label>
+     <input type="text" id="Email Address" name="Email Address" required>
+     <label for="Phone Number">Phone Number:</label> 
+     <input type="text" id="Phone Number" name="Phone Number" required> 
+    <br><br> 
+      <label for="password">Password:</label>
+      <input type=password" id=password" name="password" required>
+    <br><br> 
+    <fieldset> 
+     <legend>Out of these books, which one do you like the most?:</legend>
+     <input type="checkbox" id="book" name="The Hobbit" value="book">
+     <label for="The Hobbit">The Hobbit</label><br>
+     <input type="checkbox" id="book" name="The Seven Kingdoms" value="book">
+     <label for="The Seven Kingdoms">The Seven Kingdoms</label><br>
+     <input type="checkbox" id="book" name="Of Mice and Men" value="book">
+     <label for="Of Mice and Men">Of Mice and Men</label><br>
+     <input type="checkbox" id="book" name="Who Moved My Cheese?" value="book">
+     <label for="Who Moved My Cheese">Who Moved My Cheese</label><br>
+     <input type="checkbox" id="book" name="To be Popular or Smart?" value="book">
+     <label for="To be Popular or Smart">To be Popular or Smart</label><br>
+     <input type="checkbox" id="book" name="The Bible" value="book">
+     <label for="The Bible">The Bible</label><br>
+     <input type="checkbox" id="book" name="The Polished Hoe" value="book">
+     <label for="The Polished Hoe">The Polished Hoe</label><br>
+     <input type="checkbox" id="book" name="Great Expectations" value="book">
+     <label for="Great Expectations">Great Expectations</label><br>
+     <input type="checkbox" id="book" name="Moby Dick" value="book">
+     <label for="Moby Dick">Moby Dick</label><br>
+     <input type="checkbox" id="book" name="The Great Gatsby" value="book">
+     <label for="The Great Gatsby">The Great Gatsby</label><br>
+     <input type="checkbox" id="book" name="Death of a Salesman" value="book">
+     <label for="Death of a Salesman">Death of a Salesman</label><br>
+     <input type="checkbox" id="book" name="Adventures of Huckleberry Finn" value="book">
+     <label for="Adventures of Huckleberry Finn">Adventures of Huckleberry Finn</label><br>
+    </fieldset> 
+    <br> 
+  <fieldset> 
+    <legend>Select your preferred musical style:>
+    <input type="radio" id="Music1" "name"=Musical Genre" value="R&B" checked> 
+    <label for="Musical Genre">R&B"</label><br>
+    <input type="radio" id="Music2" "name"=Musical Genre" value="Hip-Hop" checked> 
+    <label for="Musical Genre">Hip-Hop"</label><br>
+    <input type="radio" id="Music3" "name"=Musical Genre" value="Classical" checked> 
+    <label for="Musical Genre">"Classical"</label><br>
+    <input type="radio" id="Music4" "name"=Musical Genre" value="Jazz" checked> 
+    <label for="Musical Genre">Jazz"</label><br>
+    <input type="radio" id="Music5" "name"=Musical Genre" value="Reggae" checked> 
+    <label for="Musical Genre">Reggae"</label><br>
+    <input type="radio" id="Music6" "name"=Musical Genre" value="Pop" checked> 
+    <label for="Musical Genre">"Pop"</label><br>
+    <input type="radio" id="Music7" "name"=Musical Genre" value="Techno" checked> 
+    <label for="Musical Genre">Techno"</label><br>
+    <input type="radio" id="Music8" "name"=Musical Genre" value="Flamenco" checked> 
+    <label for="Musical Genre">"Flamenco"</label><br>
+   </fieldset>
+   <br> 
+   <fieldset>
+   <label for="Browser Selection">Which browser did you use for this form?:</label>
+   <select name="Selected Browswer" id="Browser Selection">
+   <option value="Google Chrome">Google Chrome</option>
+   <option value="Microsoft Edge">Microsoft Edge</option>
+   <option value="Mozilla Firefox">Mozilla Firefox</option>
+   <option value="Safari">Safari</option>
+   <option value="Internet Explorer">Internet Explorer<option>
+   </select> 
+  </fieldset>
+    <input type="submit results" value="submit results">
+  </form> 
+</body> 
+</html>
