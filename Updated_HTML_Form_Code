@@ -74,6 +74,7 @@
    <option value="Safari">Safari</option>
    <option value="Internet Explorer">Internet Explorer</option>
   </fieldset>
-  </for<input type="submit" value="Submit Results">m> 
+  <input type="submit" value="Submit Results"> 
+  </form>
 </body> 
 </html>
