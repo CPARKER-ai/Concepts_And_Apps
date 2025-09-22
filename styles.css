@@ -1,3 +1,4 @@
+My Computer Science Website Template(Title:CS Foundations): 
 <!DOCTYPE>
 <html> 
  <head> 
@@ -12,12 +13,21 @@
   border: 1px solid #ccc; 
   padding: 15px; 
   margin-bottom: 20px; 
-  } 
-  h2{ 
-  color: #1b3a57; 
-  } 
-  ul { 
-  list-style-type: square; 
-   } 
+  }
  </style> 
  </head>
+ <body>
+ <article> 
+ <h1>Introduction to CS</h1>
+ <h2>Who is credited as the father of computer science?</h2>
+ <ul>
+ <li>Greg Orchard</li>
+ <li>Albert Einstein</li>
+ <li>Alan Turing</li>
+ <li>Napoleon the Third</li>
+ </ul>
+ </article>
+ </body>
+</html>
+
+
