@@ -19,6 +19,10 @@ const cars = ["Buick", "Volvo", "BMW"];
 // JS Objects 
 const car = {type:"Fiat", model:"500", color:"white"};
 
+// Null and Undefined 
+let identifier = null; 
+let unknownID; 
+
 
 
 
