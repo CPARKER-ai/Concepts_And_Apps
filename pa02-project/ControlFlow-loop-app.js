@@ -47,6 +47,21 @@ const age = parseInt(document.getElementById('age').value.trim(), 10);
   });
 });
 
+// Updated Array Variables
+const id = ["idCard", "passport", "insuranceCard", "studentID", "driversLicense", "debitCardStatement"]; 
+
+// Creating the conditional array function for the 6 item loop for id authentication
+function renderAuthenticationForms(array) { 
+const container = document.getElementById("Authentication"); 
+container.innerHTML = " "; 
+
+for (let i = 0; i < array.length; i++) {
+ const li = document.createElement("li"); 
+  li.textContent = array[i]; 
+  container.appendChild(li); 
+
+renderAuthenticationForms(id);
+  }; 
 
 
 
