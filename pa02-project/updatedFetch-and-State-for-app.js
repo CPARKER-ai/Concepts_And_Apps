@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('userForm');        
   const statusDiv = document.getElementById('status');  
   const emailInput = document.getElementById('email');
+// Updated Array Variables
+  const id = ["idCard", "passport", "insuranceCard", "studentID", "driversLicense", "debitCardStatement"]; 
 
   // Input event listener for email input
   emailInput.addEventListener('input', function(event) {
@@ -51,14 +53,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const name = document.getElementById('name').value.trim(); 
     const email = emailInput.value.trim(); 
     const age = parseInt(document.getElementById('age').value.trim(), 10);
+
+    const formData = { name, email, age };
+
+  // including Fetch
+  fetch('https://example.com/api/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    
+    // Updated state status
+    statusDiv.textContent = "Form submitted successfully! Server says: " + data.message;
+  })
+  .catch(error => {
+    statusDiv.textContent = "Error submitting form: " + error.message;
   });
-
-  // Updated Array Variables
-  const id = ["idCard", "passport", "insuranceCard", "studentID", "driversLicense", "debitCardStatement"]; 
-
-  // Render the authentication forms list on page load
+});
+ // Render the authentication forms list on page load
   renderAuthenticationForms(id);
-}); 
+  });
 
 // Creating the conditional array function for the 6 item loop for id authentication
 function renderAuthenticationForms(array) { 
