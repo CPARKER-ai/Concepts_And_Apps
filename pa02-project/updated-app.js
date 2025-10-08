@@ -11,7 +11,17 @@ let todaysDate = "10-7-2025";
 let x = 10; 
 let y = 20; 
 let z = x*y; 
+console.log("Multiply:", z);
 const b = 21; 
+
+// Boolean
+let equalVariables = (y === b);
+console.log("Are y and b equal?", equalVariables); 
+let registeredAdult = true;
+let hasID = false;
+let eligibletoEnter = registeredAdult && hasID;
+console.log("Can enter?", eligibletoEnter);
+
 
 // Arrays 
 const cars = ["Buick", "Volvo", "BMW"];
