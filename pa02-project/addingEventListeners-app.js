@@ -33,6 +33,21 @@ const car = {type:"Fiat", model:"500", color:"white"};
 let identifier = null; 
 let unknownID; 
 
+// Adding event listeners
+document.addEventListener('DOMContentLoaded', function() { 
+const form = document.getElementById('userForm');        
+const statusDiv = document.getElementById('status');      
+
+form.addEventListener('submit', function(event) {
+event.preventDefault(); // prevent page reload 
+
+const name = document.getElementById('name').value.trim(); 
+const email = document.getElementById('email').value.trim(); 
+const age = parseInt(document.getElementById('age').value.trim(), 10);
+  });
+});
+
+
 
 
 
