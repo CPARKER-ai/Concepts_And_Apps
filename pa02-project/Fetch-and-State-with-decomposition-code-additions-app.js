@@ -33,6 +33,17 @@ const car = {type:"Fiat", model:"500", color:"white"};
 let identifier = null; 
 let unknownID; 
 
+// BuildURL function definition - for Decomposition 
+function buildURL(baseURL, params = {}) {
+  const url = new URL(baseURL);
+  Object.keys(params).forEach(key => {
+    if (params[key] !== undefined && params[key] !== null) {
+      url.searchParams.append(key, params[key]);
+    }
+  });
+  return url.toString();
+}
+
 // Adding event listeners
 document.addEventListener('DOMContentLoaded', function() { 
   const form = document.getElementById('userForm');        
@@ -40,6 +51,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const emailInput = document.getElementById('email');
 // Updated Array Variables
   const id = ["idCard", "passport", "insuranceCard", "studentID", "driversLicense", "debitCardStatement"]; 
+  renderAuthenticationForms(id);
+
+  const baseURL = 'https://api.example.com/items';
+  const params = { category: 'identification', page: 1 };
+  const url = buildURL(baseURL, params);
 
   // Input event listener for email input
   emailInput.addEventListener('input', function(event) {
@@ -49,14 +65,20 @@ document.addEventListener('DOMContentLoaded', function() {
   // Submit event listener for form
   form.addEventListener('submit', function(event) {
     event.preventDefault(); // prevent page reload 
-
     const name = document.getElementById('name').value.trim(); 
     const email = emailInput.value.trim(); 
     const age = parseInt(document.getElementById('age').value.trim(), 10);
-
-    const formData = { name, email, age };
+    const formData = { name, email, age }; 
 
   // including Fetch
+  fetch(url)
+  .then(response => {
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return response.json();
+  })
+  .then(data => renderList(data))
+  .catch(handleError); 
+  
   fetch('https://example.com/api/submit', {
     method: 'POST',
     headers: {
@@ -75,7 +97,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
  // Render the authentication forms list on page load
-  renderAuthenticationForms(id);
+
+function renderList(data) {
+  console.log("Fetched data:", data);
+}
+
+function handleError(error) {
+  console.error("Fetch error:", error.message);
+}
   });
 
 // Creating the conditional array function for the 6 item loop for id authentication
@@ -89,8 +118,6 @@ function renderAuthenticationForms(array) {
     container.appendChild(li); 
   }
 } 
-
-
 
 
 
