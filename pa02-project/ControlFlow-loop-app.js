@@ -35,33 +35,42 @@ let unknownID;
 
 // Adding event listeners
 document.addEventListener('DOMContentLoaded', function() { 
-const form = document.getElementById('userForm');        
-const statusDiv = document.getElementById('status');      
+  const form = document.getElementById('userForm');        
+  const statusDiv = document.getElementById('status');  
+  const emailInput = document.getElementById('email');
 
-form.addEventListener('submit', function(event) {
-event.preventDefault(); // prevent page reload 
-
-const name = document.getElementById('name').value.trim(); 
-const email = document.getElementById('email').value.trim(); 
-const age = parseInt(document.getElementById('age').value.trim(), 10);
+  // Input event listener for email input
+  emailInput.addEventListener('input', function(event) {
+    console.log("Email input changed to:", event.target.value);
   });
-});
 
-// Updated Array Variables
-const id = ["idCard", "passport", "insuranceCard", "studentID", "driversLicense", "debitCardStatement"]; 
+  // Submit event listener for form
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // prevent page reload 
+
+    const name = document.getElementById('name').value.trim(); 
+    const email = emailInput.value.trim(); 
+    const age = parseInt(document.getElementById('age').value.trim(), 10);
+  });
+
+  // Updated Array Variables
+  const id = ["idCard", "passport", "insuranceCard", "studentID", "driversLicense", "debitCardStatement"]; 
+
+  // Render the authentication forms list on page load
+  renderAuthenticationForms(id);
+}); 
 
 // Creating the conditional array function for the 6 item loop for id authentication
 function renderAuthenticationForms(array) { 
-const container = document.getElementById("Authentication"); 
-container.innerHTML = " "; 
+  const container = document.getElementById("Authentication"); 
+  container.innerHTML = ""; 
 
-for (let i = 0; i < array.length; i++) {
- const li = document.createElement("li"); 
-  li.textContent = array[i]; 
-  container.appendChild(li); 
-
-renderAuthenticationForms(id);
-  }; 
+  for (let i = 0; i < array.length; i++) {
+    const li = document.createElement("li"); 
+    li.textContent = array[i]; 
+    container.appendChild(li); 
+  }
+} 
 
 
 
