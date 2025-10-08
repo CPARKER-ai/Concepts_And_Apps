@@ -13,6 +13,11 @@ let y = 20;
 let z = x*y; 
 const b = 21; 
 
+// Arrays 
+const cars = ["Buick", "Volvo", "BMW"];
+
+
+
 
 
 
