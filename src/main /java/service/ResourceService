@@ -1,0 +1,170 @@
+package org.concepts3060.pa03project.service;
+
+import org.concepts3060.pa03project.dto.ResourceDTO;
+import org.concepts3060.pa03project.dto.CategoryDTO;
+import org.concepts3060.pa03project.dto.LocationDTO;
+import org.concepts3060.pa03project.exception.NotFoundException;
+import org.concepts3060.pa03project.exception.InvalidReferenceException;
+import org.concepts3060.pa03project.util.PageEnvelope;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
+
+@Service
+public class ResourceService {
+
+    private final Map<Long, ResourceDTO> resources = new HashMap<>();
+    private final AtomicLong idGenerator = new AtomicLong(1);
+
+    private final LocationService locationService;
+    private final CategoryService categoryService;
+
+    public ResourceService(LocationService locationService, CategoryService categoryService) {
+        this.locationService = locationService;
+        this.categoryService = categoryService;
+    }
+
+    
+    // CREATE
+    public ResourceDTO createResource(ResourceDTO dto) {
+        LocationDTO loc = validateLocation(dto.getLocationId());
+        CategoryDTO cat = validateCategory(dto.getCategoryId());
+
+        Long id = idGenerator.getAndIncrement();
+        dto.setId(id);
+        dto.setLocation(loc);
+        dto.setCategory(cat);
+
+        resources.put(id, dto);
+        return dto;
+    }
+
+  
+    // READ ALL
+    public PageEnvelope<ResourceDTO> getAllResources(int page, int size, String sort, Long category, String q)
+     {
+        List<ResourceDTO> all = new ArrayList<>(resources.values());
+
+        // Optional filtering
+        if (category != null) {
+            all = all.stream()
+                    .filter(r -> Objects.equals(r.getCategoryId(), category))
+                    .collect(Collectors.toList());
+        }
+        if (q != null && !q.isBlank()) {
+            String query = q.toLowerCase();
+            all = all.stream()
+                    .filter(r -> r.getName() != null && r.getName().toLowerCase().contains(query))
+                    .collect(Collectors.toList());
+        }
+
+        // Sorting
+        if (sort != null && !sort.isBlank()) {
+            String[] fields = sort.split(",");
+            Comparator<ResourceDTO> comparator = null;
+
+            for (String field : fields) {
+                boolean desc = field.startsWith("-");
+                String key = desc ? field.substring(1) : field;
+
+                Comparator<ResourceDTO> next = Comparator.comparing(resource -> {
+                    switch (key) {
+                        case "name":
+                            return resource.getName();
+                        case "category":
+                            return (resource.getCategory() != null) ? resource.getCategory().getName() : null;
+                        case "location":
+                            return (resource.getLocation() != null) ? resource.getLocation().getBuilding() : null;
+                        default:
+                            return null;
+                    }
+                }, Comparator.nullsLast(Comparator.naturalOrder()));
+
+                if (desc) next = next.reversed();
+                comparator = (comparator == null) ? next : comparator.thenComparing(next);
+            }
+
+            if (comparator != null) all.sort(comparator);
+        }
+
+        // Paging
+        long totalElements = all.size();
+        int start = Math.min(page * size, all.size());
+        int end = Math.min(start + size, all.size());
+        List<ResourceDTO> content = all.subList(start, end);
+
+        return new PageEnvelope<>(content, page, size, totalElements);
+    }
+
+    // -----------------------------------------------------------
+    // READ (ONE)
+    // -----------------------------------------------------------
+    public ResourceDTO getResourceById(Long id) {
+        ResourceDTO dto = resources.get(id);
+        if (dto == null)
+            throw new NotFoundException("Resource " + id + " not found.");
+        return dto;
+    }
+
+    // -----------------------------------------------------------
+    // UPDATE
+    // -----------------------------------------------------------
+    public ResourceDTO updateResource(Long id, ResourceDTO dto) {
+        ResourceDTO existing = resources.get(id);
+        if (existing == null)
+            throw new NotFoundException("Resource " + id + " not found.");
+
+        LocationDTO loc = validateLocation(dto.getLocationId());
+        CategoryDTO cat = validateCategory(dto.getCategoryId());
+
+        dto.setId(id);
+        dto.setLocation(loc);
+        dto.setCategory(cat);
+
+        resources.put(id, dto);
+        return dto;
+    }
+
+    // -----------------------------------------------------------
+    // DELETE
+    // -----------------------------------------------------------
+    public void deleteResource(Long id) {
+        if (!resources.containsKey(id))
+            throw new NotFoundException("Resource " + id + " not found.");
+        resources.remove(id);
+    }
+
+    // -----------------------------------------------------------
+    // UTILITIES
+    // -----------------------------------------------------------
+    private LocationDTO validateLocation(Long locationId) {
+        if (locationId == null) return null;
+        try {
+            return locationService.getLocationById(locationId);
+        } catch (NotFoundException e) {
+            throw new InvalidReferenceException("Invalid location ID: " + locationId);
+        }
+    }
+
+    private CategoryDTO validateCategory(Long categoryId) {
+        if (categoryId == null) return null;
+        try {
+            return categoryService.getCategoryById(categoryId);
+        } catch (NotFoundException e) {
+            throw new InvalidReferenceException("Invalid category ID: " + categoryId);
+        }
+    }
+
+    // Referential Integrity Checks 
+    public boolean isLocationInUse(Long locationId) {
+        return resources.values().stream()
+                .anyMatch(r -> Objects.equals(r.getLocationId(), locationId));
+    }
+
+    public boolean isCategoryInUse(Long categoryId) {
+        return resources.values().stream()
+                .anyMatch(r -> Objects.equals(r.getCategoryId(), categoryId));
+    }
+}
