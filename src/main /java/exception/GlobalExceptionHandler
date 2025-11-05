@@ -1,0 +1,64 @@
+package org.concepts3060.pa03project.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.context.request.WebRequest;
+
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    // 404 — Resource not found
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleNotFound(NotFoundException ex, WebRequest request) {
+        return buildError(HttpStatus.NOT_FOUND, ex.getMessage(), request);
+    }
+
+    // 400 — Invalid reference (bad foreign key)
+    @ExceptionHandler(InvalidReferenceException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidReference(InvalidReferenceException ex, WebRequest request) {
+        return buildError(HttpStatus.BAD_REQUEST, ex.getMessage(), request);
+    }
+
+    // 409 — Conflict (referential integrity)
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<Map<String, Object>> handleConflict(ConflictException ex, WebRequest request) {
+        return buildError(HttpStatus.CONFLICT, ex.getMessage(), request);
+    }
+
+    // 400 — Bean Validation errors (@Valid)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex, WebRequest request) {
+        String message = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(err -> err.getField() + ": " + err.getDefaultMessage())
+                .collect(Collectors.joining(", "));
+        return buildError(HttpStatus.BAD_REQUEST, message, request);
+    }
+
+    // 500 — Catch-all for any unhandled exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGeneral(Exception ex, WebRequest request) {
+        return buildError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), request);
+    }
+
+    // Helper method to generate uniform JSON structure
+    private ResponseEntity<Map<String, Object>> buildError(HttpStatus status, String message, WebRequest request) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", Instant.now().toString());
+        body.put("status", status.value());
+        body.put("error", status.getReasonPhrase());
+        body.put("message", message);
+        body.put("path", ((ServletWebRequest) request).getRequest().getRequestURI());
+        return ResponseEntity.status(status).body(body);
+    }
+}
