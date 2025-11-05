@@ -1,0 +1,98 @@
+package org.concepts3060.pa03project.service;
+
+import org.concepts3060.pa03project.exception.ConflictException;
+import org.concepts3060.pa03project.exception.NotFoundException;
+import org.concepts3060.pa03project.dto.CategoryDTO;
+import org.concepts3060.pa03project.util.PageEnvelope;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
+
+@Service
+public class CategoryService {
+
+    // In-memory store of categories
+    private final Map<Long, CategoryDTO> categories = new ConcurrentHashMap<>();
+    private final AtomicLong idGenerator = new AtomicLong(1);
+
+    // CREATE
+    public CategoryDTO createCategory(CategoryDTO dto) {
+        long id = idGenerator.getAndIncrement();
+        dto.setId(id);
+        categories.put(id, dto);
+        return dto;
+    }
+
+    // ------------------------------------------------------------
+    // READ ALL (with paging/sorting)
+    // ------------------------------------------------------------
+    public PageEnvelope<CategoryDTO> getAllCategories(int page, int size, String sort) {
+        Comparator<CategoryDTO> comparator;
+
+        // Choose field to sort by (default = name)
+        if ("id".equalsIgnoreCase(sort)) {
+            comparator = Comparator.comparing(CategoryDTO::getId);
+        } else {
+            comparator = Comparator.comparing(CategoryDTO::getName, Comparator.nullsLast(String::compareToIgnoreCase));
+        }
+
+        // Perform sorting and paging
+        List<CategoryDTO> sorted = categories.values().stream()
+                .sorted(comparator)
+                .skip((long) page * size)
+                .limit(size)
+                .collect(Collectors.toList());
+
+        return new PageEnvelope<>(
+                sorted,
+                page,
+                size,
+                categories.size()
+        );
+    }
+
+    // ------------------------------------------------------------
+    // READ ONE
+    // ------------------------------------------------------------
+    public CategoryDTO getCategoryById(Long id) {
+        CategoryDTO dto = categories.get(id);
+        if (dto == null) {
+            throw new NotFoundException("Category " + id + " not found");
+        }
+        return dto;
+    }
+
+    // ------------------------------------------------------------
+    // UPDATE
+    // ------------------------------------------------------------
+    public CategoryDTO updateCategory(Long id, CategoryDTO dto) {
+        CategoryDTO existing = getCategoryById(id);
+        existing.setName(dto.getName());
+        return existing;
+    }
+
+    // ------------------------------------------------------------
+    // DELETE
+    // ------------------------------------------------------------
+    public void deleteCategory(Long id) {
+        if (!categories.containsKey(id)) {
+            throw new NotFoundException("Category " + id + " not found");
+        }
+
+        //  Placeholder: later check ResourceService to see if any Resource uses this Category
+        boolean inUse = false; // TODO: Replace with actual logic once ResourceService is implemented
+        if (inUse) {
+            throw new ConflictException("Category " + id + " is in use by one or more resources.");
+        }
+
+        categories.remove(id);
+    }
+
+// For validation checks
+    public boolean existsById(Long id) {
+        return categories.containsKey(id);
+    }
+}
