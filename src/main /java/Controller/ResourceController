@@ -1,0 +1,78 @@
+package org.concepts3060.pa03project.controller;
+
+import org.concepts3060.pa03project.dto.ResourceDTO;
+import org.concepts3060.pa03project.service.ResourceService;
+import org.concepts3060.pa03project.util.PageEnvelope;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * Controller for managing campus resources.
+ * Supports CRUD + paging, sorting, and filtering by category and query text.
+ */
+@RestController
+@RequestMapping("/api/resources")
+public class ResourceController {
+
+    private final ResourceService resourceService;
+
+    // Constructor injection (recommended for Spring)
+    public ResourceController(ResourceService resourceService) {
+        this.resourceService = resourceService;
+    }
+
+    // ------------------------------------------------------------
+    // CREATE
+    // --------------------------------------------------------------
+    @PostMapping
+    public ResponseEntity<ResourceDTO> createResource(@Valid @RequestBody ResourceDTO dto) {
+        ResourceDTO created = resourceService.createResource(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+    // ------------------------------------------------------------
+    // READ ALL (with paging/sorting/filtering)
+    // ------------------------------------------------------------
+    @GetMapping
+    public ResponseEntity<PageEnvelope<ResourceDTO>> getAllResources(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) Long category,
+            @RequestParam(required = false) String q) {
+
+        PageEnvelope<ResourceDTO> envelope =
+                resourceService.getAllResources(page, size, sort, category, q);
+
+        return ResponseEntity.ok(envelope);
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<ResourceDTO> getResourceById(@PathVariable Long id) {
+        ResourceDTO dto = resourceService.getResourceById(id);
+        return ResponseEntity.ok(dto);
+    }
+
+    // ------------------------------------------------------------
+    // UPDATE
+    // ------------------------------------------------------------
+    @PutMapping("/{id}")
+    public ResponseEntity<ResourceDTO> updateResource(
+            @PathVariable Long id,
+            @Valid @RequestBody ResourceDTO dto) {
+
+        ResourceDTO updated = resourceService.updateResource(id, dto);
+        return ResponseEntity.ok(updated);
+    }
+
+    // ------------------------------------------------------------
+    // DELETE
+    // ------------------------------------------------------------
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteResource(@PathVariable Long id) {
+        resourceService.deleteResource(id);
+        return ResponseEntity.noContent().build();
+    }
+}
