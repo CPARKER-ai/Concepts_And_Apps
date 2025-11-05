@@ -1,0 +1,87 @@
+package org.concepts3060.pa03project.controller;
+
+import org.concepts3060.pa03project.service.CategoryService;
+import org.concepts3060.pa03project.util.PageEnvelope;
+import org.concepts3060.pa03project.service.ResourceService;
+import org.concepts3060.pa03project.dto.CategoryDTO;
+import jakarta.validation.Valid;
+import org.concepts3060.pa03project.dto.ResourceDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+
+@RestController
+@RequestMapping("/api/categories")
+public class CategoryController {
+
+    private final CategoryService categoryService;
+    private final ResourceService resourceService; // ✅ Inject ResourceService
+
+    // ✅ Constructor injection for both services
+    public CategoryController(CategoryService categoryService, ResourceService resourceService) {
+        this.categoryService = categoryService;
+        this.resourceService = resourceService;
+    }
+
+    @GetMapping("/resources")
+            ResponseEntity<PageEnvelope<ResourceDTO>> getAllResources(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String sort) {
+
+        PageEnvelope<ResourceDTO> envelope = resourceService.getAllResources(page, size, sort, null, null);
+        return ResponseEntity.ok(envelope);
+    }
+
+
+    // -----------------------------------------------------------
+    // CREATE
+    // -----------------------------------------------------------
+    @PostMapping
+    public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO dto) {
+        CategoryDTO created = categoryService.createCategory(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+    // -----------------------------------------------------------
+    // READ ALL (with paging/sorting)
+    // -----------------------------------------------------------
+    @GetMapping
+    public ResponseEntity<PageEnvelope<CategoryDTO>> getAllCategories(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String sort) {
+
+        PageEnvelope<CategoryDTO> envelope = categoryService.getAllCategories(page, size, sort);
+        return ResponseEntity.ok(envelope);
+    }
+
+    // -----------------------------------------------------------
+    // READ ONE
+    // -----------------------------------------------------------
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id) {
+        CategoryDTO dto = categoryService.getCategoryById(id);
+        return ResponseEntity.ok(dto);
+    }
+
+    // -----------------------------------------------------------
+    // UPDATE
+    // -----------------------------------------------------------
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Long id,
+                                                      @Valid @RequestBody CategoryDTO dto) {
+        CategoryDTO updated = categoryService.updateCategory(id, dto);
+        return ResponseEntity.ok(updated);
+    }
+
+    // -----------------------------------------------------------
+    // DELETE
+    // -----------------------------------------------------------
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
+        return ResponseEntity.noContent().build();
+    }
+}
