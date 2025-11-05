@@ -1,0 +1,29 @@
+Within the implementation sections of my project I have included the essentials sections for my: DTO, Controller, Service, Exception and Utility classes for my PA03 project.
+
+I organized each of these in the locations where they are most relevant for better readability in between different classes and functionality between the class code sequences.
+
+The focus of my project is to implement a RESTful Campus Resources API in Java using Spring Boot with two main DTO types: Categories and Locations. 
+
+My project covers:
+- Controller/Service/DTO pattern (no database)
+- Bean Validation (`@Valid`, `@NotBlank`, `@NotNull`)
+- Paging and sorting with a `PageEnvelope`
+- Global exception handling with a uniform error JSON format
+- Referential integrity enforcement (409 Conflict)
+- Among other essential topics focused in the instructions.
+
+In order to run it, it requires these instructions: 
+## Run Instructions
+1. Open the project in IntelliJ.
+2. Run the main Spring Boot class (e.g., `Pa03ProjectApplication.java`).
+3. The API will start on [http://localhost:8080](http://localhost:8080). - ex. 
+
+Furthermore, while using the Desktop Version of Postman, I was able to get the GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS 
+commands working. 
+
+All of these included connecting the API to the local host at 8080, while running these commands through IntelliJ for my project.
+
+The necessary dependencies includes in my project are contained my pom.xml file, and my code for my commands are found in my
+PA03_Campus_Resources_API.postman_collection.json file. 
+
+
