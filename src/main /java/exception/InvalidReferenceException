@@ -1,0 +1,8 @@
+package org.concepts3060.pa03project.exception;
+
+public class InvalidReferenceException extends RuntimeException {
+    public InvalidReferenceException(String message) {
+        super(message);
+    }
+}
+
