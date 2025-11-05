@@ -1,0 +1,12 @@
+package org.concepts3060.pa03project;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Pa03ProjectApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Pa03ProjectApplication.class, args);
+    }
+}
