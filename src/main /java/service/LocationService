@@ -1,0 +1,87 @@
+package org.concepts3060.pa03project.service;
+
+import org.concepts3060.pa03project.dto.LocationDTO;
+import org.concepts3060.pa03project.exception.NotFoundException;
+import org.concepts3060.pa03project.exception.ConflictException;
+import org.concepts3060.pa03project.util.PageEnvelope;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
+
+@Service
+public class LocationService {
+
+    private final Map<Long, LocationDTO> locations = new ConcurrentHashMap<>();
+    private final AtomicLong idGenerator = new AtomicLong(1);
+
+    // ------------------------------------------------------------
+    // CREATE
+    // ------------------------------------------------------------
+    public LocationDTO createLocation(LocationDTO dto) {
+        long id = idGenerator.getAndIncrement();
+        dto.setId(id);
+        locations.put(id, dto);
+        return dto;
+    }
+
+    // ------------------------------------------------------------
+    // READ ALL (with paging/sorting)
+    // ------------------------------------------------------------
+    public PageEnvelope<LocationDTO> getAllLocations(int page, int size, String sort) {
+        Comparator<LocationDTO> comparator = Comparator.comparing(
+                LocationDTO::getBuilding,
+                Comparator.nullsLast(String::compareToIgnoreCase)
+        );
+
+        List<LocationDTO> sorted = locations.values().stream()
+                .sorted(comparator)
+                .skip((long) page * size)
+                .limit(size)
+                .collect(Collectors.toList());
+
+        return new PageEnvelope<>(sorted, page, size, locations.size());
+    }
+
+    // ------------------------------------------------------------
+    // READ ONE
+    // ------------------------------------------------------------
+    public LocationDTO getLocationById(Long id) {
+        LocationDTO dto = locations.get(id);
+        if (dto == null)
+            throw new NotFoundException("Location " + id + " not found");
+        return dto;
+    }
+
+    // ------------------------------------------------------------
+    // UPDATE
+    // ------------------------------------------------------------
+    public LocationDTO updateLocation(Long id, LocationDTO dto) {
+        LocationDTO existing = getLocationById(id);
+        existing.setBuilding(dto.getBuilding());
+        existing.setRoom(dto.getRoom());
+        return existing;
+    }
+
+    // ------------------------------------------------------------
+    // DELETE
+    // ------------------------------------------------------------
+    public void deleteLocation(Long id) {
+        if (!locations.containsKey(id))
+            throw new NotFoundException("Location " + id + " not found");
+
+        boolean inUse = false; // Replace with real logic checking ResourceService
+        if (inUse) {
+            throw new ConflictException("Location " + id + " is in use by one or more resources");
+        }
+
+        locations.remove(id);
+    }
+
+    // Optional helper to validate existence
+    public boolean existsById(Long id) {
+        return locations.containsKey(id);
+    }
+}
