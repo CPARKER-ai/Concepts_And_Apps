@@ -1,0 +1,40 @@
+package org.concepts3060.pa03project.dto;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class LocationDTO {
+
+    private Long id;
+
+    @NotBlank(message = "Building is required")
+    private String building;
+
+    @NotBlank(message = "Room is required")
+    private String room;
+
+    //  Getters
+    public Long getId() {
+        return id;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    //  Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+}
